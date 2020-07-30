@@ -1,0 +1,13 @@
+# ignore TXT file
+*.TXT
+
+# ignore Python virtual environment
+.venv/
+.vscode/
+
+# ignore JSON folders
+cfb_json_2018/
+cfb_json_2019/
+
+# Ignore Mac system files
+.DS_store
