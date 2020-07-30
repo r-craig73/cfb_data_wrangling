@@ -8,7 +8,7 @@
 # ignore JSON folders
 cfb_json_2018/
 cfb_json_2019/
-temp_2018
+temp_2018/
 
 # Ignore Mac system files
 .DS_store
