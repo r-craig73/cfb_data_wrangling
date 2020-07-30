@@ -18,13 +18,13 @@ print(f'{CFB_YEAR} Postseason games: {len(basic_postseason_game_stats)}')
 # Requests and saves Vegas lines for the post season
 line = requests.get(f'https://api.collegefootballdata.com/lines?year={CFB_YEAR}&seasonType=postseason')
 vegas_lines = line.json()
-with open(f'cfb_json_{CFB_YEAR}\\postseasonVegasLines.json', 'w') as f:
+with open(f'cfb_json_{CFB_YEAR}\\postseasonVegasLines-{CFB_YEAR}.json', 'w') as f:
     json.dump(vegas_lines, f)
 
 # Requests and saves detailed stats for the post season (takes a long time, 3-4 minutes)
 for i in range(0, len(basic_postseason_game_stats), 1):
     r = requests.get(f'https://api.collegefootballdata.com/games/teams?year={CFB_YEAR}&seasonType=postseason&gameId={post_cfb_game_id[i]}')
     detailed_game_stats = r.json()
-    with open(f'cfb_json_{CFB_YEAR}\\detailedGameStats-{post_cfb_game_id[i]}.json', 'w') as f:
+    with open(f'cfb_json_{CFB_YEAR}\\detailedPostseasonGameStats-{post_cfb_game_id[i]}.json', 'w') as f:
         json.dump(detailed_game_stats, f)
     time.sleep(3)
