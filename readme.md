@@ -23,5 +23,4 @@ The scripts works. | Creating detailed game JSONs takes a while (from 5 to 45 mi
 * ```Packages: requests, json, and time```
 
 ### Things to Do
-- [ ] Organize and store from detailed games to individual CFB teams.
-- [ ] Organize and store CFB stats and vegas lines for analysis.
+- [ ] Refactor regular season and post season code to one script.
