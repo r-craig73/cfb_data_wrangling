@@ -24,3 +24,5 @@ The scripts works. | Creating detailed game JSONs takes a while (from 5 to 45 mi
 
 ### Things to Do
 - [ ] Refactor regular season and post season code to one script.
+- [ ] Create a new script using pandas package to import JSON files to a large DataFrame.
+- [ ] Create a private repository to analyze the DataFrame.
