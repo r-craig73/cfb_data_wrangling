@@ -1,7 +1,7 @@
 import requests, json, time
 
 # College football constant variables
-CFB_YEAR, GAMES, VEGAS_LINES = 2018, 'games', 'lines'
+CFB_YEAR, GAMES, VEGAS_LINES = 2019, 'games', 'lines'
 REGULAR_SEASON, POST_SEASON = 'regular', 'postseason'
 
 ## Requests and saves regular/post season stats [games] or Vegas lines [lines]
@@ -24,13 +24,13 @@ def detailed_cfb_stats(date, metric, season):
         cfb_game_id.append(basic_stats[i]['id'])
     print(f'{date} {season} total games: {len(basic_stats)}')
 
-    # Requests and saves detailed stats for the regular season (takes a loooong time, 15-45 minutes)
+    # Requests and saves detailed stats for the regular season (takes a loooong time, 15-45 minutes) #757
     for i in range(0, len(basic_stats), 1):
         r = requests.get(f'https://api.collegefootballdata.com/games/teams?year={date}&seasonType={season}&gameId={cfb_game_id[i]}')
         detailed_game_stats = r.json()
         with open(f'cfb_JSON_{date}\\detailedGameStatsCFB-{season}-{cfb_game_id[i]}.json', 'w') as f:
             json.dump(detailed_game_stats, f)
-    time.sleep(2.5)
+        time.sleep(2.5)
 
 def main():
     cfb_stats(CFB_YEAR, GAMES, REGULAR_SEASON)
