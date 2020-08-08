@@ -21,8 +21,8 @@ df_teams_basic = df_teams.drop(['stats'], axis=1)
 df_id_teams = pd.concat([df_id, df_teams_basic], axis=1)
 
 # split teams 'DataFrame' into category and stat variables
-team_0_stats = pd.DataFrame(df_teams.stats[0])
-team_1_stats = pd.DataFrame(df_teams.stats[1])
+team_0_stats = pd.DataFrame(df_teams.stats[0]).sort_values(by=['category'])
+team_1_stats = pd.DataFrame(df_teams.stats[1]).sort_values(by=['category'])
 
 # split teams 'DataFrame' into detailed teams stats, transposed
 # team_0_stats = teams_0_stats.transpose()
