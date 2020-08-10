@@ -68,6 +68,6 @@ print(df_game_stats_merge)
 # to do: [x] join (1) and (2) to a 2x5 DataFrame
 # to do: [x] (3) expand each team detailed stats into other columns, 2xN DataFrame
 # to do: [x] join (1), (2), (3) to a 2xN DataFrame
-# to do: [ ] join a game DataFrame matching the id number (postseason, basic_stats, detailed_stats), 2xN DataFrame
+# to do: [x] join a game DataFrame matching the id number (postseason, basic_stats, detailed_stats), 2xN DataFrame
 # to do: [ ] join a game DataFrame matching the id number (regular, basic_stats, detailed_stats), 2xN DataFrame
 # to do: [ ] join a vegas line game matching the id number (regular or postseason, basic_stats, detailed_stats) , 2xN DataFrame
