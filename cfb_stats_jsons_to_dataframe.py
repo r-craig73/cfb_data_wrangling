@@ -8,6 +8,7 @@ import json, os
 
 # importing one JSON file into pandas
 df = pd.read_json('temp_2018/detailedGameStatsCFB-postseason-401032055.json')
+df2 = pd.read_json('temp_2018/basicGameStatsCFB-JSON-postseason-2018.json')
 
 # split df 'DataFrame' into id variable; append id to a (1x2 matrix)
 df_id = df.drop(['teams'], axis=1)
@@ -35,11 +36,38 @@ teams_transposed = teams_transposed.set_index([pd.Index([0, 1])])
 # join df_id_teams and teams_detailed_stats DataFrames
 teams_final = pd.concat([df_id_teams, teams_transposed], axis=1)
 
-print(teams_transposed)
+# remove DataFrame variables (regular or postseason games)
+df_reduced_series = df2.drop(['attendance', 'away_id', 'away_post_win_prob', 'excitement_index', 'home_id', 'home_post_win_prob', 'start_date', 'start_time_tbd', 'venue', 'venue_id'], axis=1)
+
+# search for matching id
+id_basic_game = df_reduced_series.loc[df_reduced_series['id'] == df.id[0]]
+
+# place away team in row 0, place home team in row 1
+df_away_team = id_basic_game.loc[:, ['id', 'away_conference', 'away_line_scores', 'away_points', 'away_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={"away_conference": "conference", "away_line_scores": "by_quarter_scores", "away_points": "points", "away_team":"team"})
+df_home_team = id_basic_game.loc[:, ['id', 'home_conference', 'home_line_scores', 'home_points', 'home_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={"home_conference": "conference", "home_line_scores": "by_quarter_scores", "home_points": "points", "home_team":"team"})
+
+# merge individual game basic results
+# place away team in row 0
+df_teams_merge = df_away_team
+# place home team in row 1 and merge rows into a DataFrame
+df_teams_merge = df_teams_merge.append(df_home_team, ignore_index=True)
+
+# create a larger 3xN DataFrame (teams_final and df_teams_merge)
+# df_game_stats_merge = pd.merge(teams_final, df_teams_merge, how='inner', on=['id']).sort_values(by=['id'])
+df_game_stats_merge = pd.concat([teams_final, df_teams_merge], axis=1)
+
+# print(teams_transposed)
 print(teams_final)
+# print(df_reduced_series)
+print(df_teams_merge)
+print(df_game_stats_merge)
+# print(list(df_game_stats_merge))
 
 # to do: [x] (1) keep the id value in the first column
 # to do: [x] (2) expand teams columns into other columns
-# to do: [x] join (1) and (2) to a 3x5 DataFrame
-# to do: [x] (3) expand each team detailed stats into other columns, 3xN DataFrame
-# to do: [x] join (1), (2), (3) to a 3xN DataFrame
+# to do: [x] join (1) and (2) to a 2x5 DataFrame
+# to do: [x] (3) expand each team detailed stats into other columns, 2xN DataFrame
+# to do: [x] join (1), (2), (3) to a 2xN DataFrame
+# to do: [ ] join a game DataFrame matching the id number (postseason, basic_stats, detailed_stats), 2xN DataFrame
+# to do: [ ] join a game DataFrame matching the id number (regular, basic_stats, detailed_stats), 2xN DataFrame
+# to do: [ ] join a vegas line game matching the id number (regular or postseason, basic_stats, detailed_stats) , 2xN DataFrame
