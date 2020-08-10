@@ -25,18 +25,21 @@ team_0_stats = pd.DataFrame(df_teams.stats[0]).sort_values(by=['category'])
 team_1_stats = pd.DataFrame(df_teams.stats[1]).sort_values(by=['category'])
 
 # split teams 'DataFrame' into detailed teams stats, transposed
-# team_0_stats = teams_0_stats.transpose()
-# team_1_stats = teams_1_stats.transpose()
+team_0_stats = team_0_stats
+team_1_stats = team_1_stats
 
-# teams_detailed_stats = team_0_stats.append(team_1_stats, ignore_index=True)
+# join teams stats into a 3xN matrix ('category', 'stat_x', 'stat_y')
+teams_detailed_stats = pd.merge(team_0_stats, team_1_stats, how='inner', on=['category']).sort_values(by=['category'])
+
+# transpose teams_detailed_stats 
+teams_transposed = teams_detailed_stats.transpose()
 
 print(df_id_teams)
-print(team_0_stats)
-print(team_1_stats)
-# print(teams_detailed_stats)
+print(teams_detailed_stats)
+print(teams_transposed)
 
 # to do: [x] (1) keep the id value in the first column
 # to do: [x] (2) expand teams columns into other columns
-# to do: [x] join (1) and (2) to a 2 x 5 DataFrame
-# to do: [ ] (3) expand each team detailed stats into other columns
-# to do: [ ] join (1), (2), (3) to a 2 x N DataFrame
+# to do: [x] join (1) and (2) to a 3x5 DataFrame
+# to do: [x] (3) expand each team detailed stats into other columns, 3xN DataFram
+# to do: [ ] join (1), (2), (3) to a 3xN DataFrame
