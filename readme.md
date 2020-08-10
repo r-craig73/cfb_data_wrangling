@@ -20,7 +20,7 @@ The scripts works. | Creating detailed JSON regular season stats takes a while (
 
 ### Technologies Used
 * ```Application: Python 3.8.2 32-bit```
-* ```Packages: requests, json, time, and pandas```
+* ```Packages: requests, json, time, os, and pandas```
 
 ### Things to Do
 - [x] Refactor regular season and post season JSON import code to one script.
