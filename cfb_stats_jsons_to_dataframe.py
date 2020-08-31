@@ -39,12 +39,15 @@ teams_final = pd.concat([df_id_teams, teams_transposed], axis=1)
 
 # remove DataFrame variables (regular or postseason games)
 df_reduced_series = df2.drop(['attendance', 'away_id', 'away_post_win_prob', 'excitement_index', 'home_id', 'home_post_win_prob', 'start_date', 'start_time_tbd', 'venue', 'venue_id'], axis=1)
-
+df_reduced_vegas_lines = df3.drop(['season', 'seasonType', 'week', 'homeConference', 'homeScore', 'awayScore', 'awayConference'], axis=1)
 # search for matching id
 id_basic_game = df_reduced_series.loc[df_reduced_series['id'] == df.id[0]]
 
 # search for matching vegas line
-id_vegas_line = df3.loc[df3['id'] == df.id[0]]
+id_vegas_line = df_reduced_vegas_lines.loc[df_reduced_vegas_lines['id'] == df.id[0]]
+
+# place lines in a DataFrame, sort by provider
+vegas_lines = pd.DataFrame(id_vegas_line.lines)
 
 # place away team in row 0, place home team in row 1
 df_away_team = id_basic_game.loc[:, ['id', 'away_conference', 'away_line_scores', 'away_points', 'away_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={"away_conference": "conference", "away_line_scores": "by_quarter_scores", "away_points": "points", "away_team":"team"})
@@ -60,14 +63,16 @@ df_teams_merge = df_teams_merge.append(df_home_team, ignore_index=True)
 # create a larger 3xN DataFrame (teams_final and df_teams_merge)
 df_game_stats_merge = pd.concat([teams_final, df_teams_merge], axis=1)
 
+# remove duplates from df_game_stats_merge (To do)
+
 # print(teams_transposed)
 print(teams_final)
 # print(df_reduced_series)
 print(df_teams_merge)
 print(df_game_stats_merge)
 print(list(df_game_stats_merge))
-print(df3)
 print(id_vegas_line)
+print(vegas_lines)
 
 # to do: [x] (1) keep the id value in the first column
 # to do: [x] (2) expand teams columns into other columns
