@@ -71,8 +71,12 @@ print(teams_final)
 print(df_teams_merge)
 print(df_game_stats_merge)
 print(list(df_game_stats_merge))
+# print(len(list(df_game_stats_merge)))
 print(id_vegas_line)
 print(vegas_lines)
+# for i in range(0, len(list(df_game_stats_merge)), 1):
+#     print(list(df_game_stats_merge)[i])
+
 
 # to do: [x] (1) keep the id value in the first column
 # to do: [x] (2) expand teams columns into other columns
