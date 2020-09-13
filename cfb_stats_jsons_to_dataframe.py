@@ -49,9 +49,14 @@ id_vegas_line = df_reduced_vegas_lines.loc[df_reduced_vegas_lines['id'] == df.id
 # place lines in a Nx4 DataFrame, sort by provider
 vegas_lines = pd.DataFrame(id_vegas_line.iloc[0, 3])
 
+# pivot vegas_lines and sort by OverUnder and Spread
+lines_over_under = vegas_lines.pivot(columns='provider', values='overUnder').rename(columns={'Caesars': 'CaesarsOverUnder', 'consensus': 'consenusOverUnder', 'numberfire': 'numberfireOverUnder', 'teamrankings': 'teamrankingsOverUnder'}).fillna(method='bfill').fillna(method='ffill')
+lines_formatted_spread = vegas_lines.pivot(columns='provider', values='formattedSpread').rename(columns={'Caesars': 'CaesarsSpread', 'consensus': 'consenusSpread', 'numberfire': 'numberfireSpread', 'teamrankings': 'teamrankingsSpread'}).fillna(method='bfill').fillna(method='ffill')
+final_lines = pd.concat([lines_over_under.iloc[0:2, :], lines_formatted_spread.iloc[0:2, :]], axis=1)
+
 # place away team in row 0, place home team in row 1
-df_away_team = id_basic_game.loc[:, ['id', 'away_conference', 'away_line_scores', 'away_points', 'away_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={"away_conference": "conference", "away_line_scores": "by_quarter_scores", "away_points": "points", "away_team":"team"})
-df_home_team = id_basic_game.loc[:, ['id', 'home_conference', 'home_line_scores', 'home_points', 'home_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={"home_conference": "conference", "home_line_scores": "by_quarter_scores", "home_points": "points", "home_team":"team"})
+df_away_team = id_basic_game.loc[:, ['id', 'away_conference', 'away_line_scores', 'away_points', 'away_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={'away_conference': 'conference', 'away_line_scores': 'by_quarter_scores', 'away_points': 'points', 'away_team':'team'})
+df_home_team = id_basic_game.loc[:, ['id', 'home_conference', 'home_line_scores', 'home_points', 'home_team', 'conference_game', 'neutral_site', 'season', 'season_type', 'week']].rename(columns={'home_conference': 'conference', 'home_line_scores': 'by_quarter_scores', 'home_points': 'points', 'home_team':'team'})
 
 # merge individual game basic results
 # place away team in row 0
@@ -60,30 +65,34 @@ df_teams_merge = df_away_team
 # place home team in row 1 and merge rows into a DataFrame
 df_teams_merge = df_teams_merge.append(df_home_team, ignore_index=True)
 
-# create a larger 3xN DataFrame (teams_final and df_teams_merge)
+# create a larger 2xN DataFrame (teams_final and df_teams_merge)
 df_game_stats_merge = pd.concat([teams_final, df_teams_merge], axis=1)
+final_df = pd.concat([df_game_stats_merge, final_lines], axis=1)
 
 # remove duplates from df_game_stats_merge (To do)
 
-# print(teams_transposed)
 print(teams_final)
-# print(df_reduced_series)
 print(df_teams_merge)
 print(df_game_stats_merge)
-print(list(df_game_stats_merge))
 # print(len(list(df_game_stats_merge)))
-print(id_vegas_line)
+# print(id_vegas_line)
 print(vegas_lines)
-# for i in range(0, len(list(df_game_stats_merge)), 1):
-#     print(list(df_game_stats_merge)[i])
+# print(lines_over_under)
+# print(lines_formatted_spread)
+print(lines_formatted_spread.iloc[0:2, :])
+print(final_lines)
+print(final_df)
+print(list(final_df))
 
+# for i in range(0, len(list(final_df)), 1):
+#     print(list(final_df)[i])
 
 # to do: [x] (1) keep the id value in the first column
 # to do: [x] (2) expand teams columns into other columns
 # to do: [x] join (1) and (2) to a 2x5 DataFrame
 # to do: [x] (3) expand each team detailed stats into other columns, 2xN DataFrame
 # to do: [x] (4) join a vegas line game matching the id number of a game (regular or postseason, basic_stats, detailed_stats) , 2xN DataFrame
-# to do: [ ] join (1), (2), (3), and (4) to a 2xN DataFrame
+# to do: [x] join (1), (2), (3), and (4) to a 2xN DataFrame
 # to do: [ ] join a game DataFrame matching the id number of a postseason game (postseason, basic_stats, detailed_stats), 2xN DataFrame
 # to do: [ ] join a game DataFrame matching the id number of a regular game (regular, basic_stats, detailed_stats), 2xN DataFrame
 
