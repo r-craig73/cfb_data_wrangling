@@ -2,13 +2,10 @@
 *.TXT
 
 # ignore Python virtual environment
-.venv/
-.vscode/
+.spyproject
 
-# ignore JSON folders
-cfb_json_2018/
-cfb_json_2019/
-temp_2018/
+# ignore Python file
+con*.py
 
 # Ignore Mac system files
 .DS_store
