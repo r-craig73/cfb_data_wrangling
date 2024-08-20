@@ -7,5 +7,8 @@
 # ignore Python file
 con*.py
 
+# ignore JSON files
+*.json
+
 # Ignore Mac system files
 .DS_store
