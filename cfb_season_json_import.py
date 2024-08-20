@@ -1,44 +1,72 @@
-import requests, json, time
+import requests
+import json
+import constant
+service_key = constant.API_KEY
 
 # College football constant variables
-CFB_YEAR, GAMES, VEGAS_LINES = 2019, 'games', 'lines'
-REGULAR_SEASON, POST_SEASON = 'regular', 'postseason'
+CFB_YEAR, GAMES, WEEK, VEGAS_LINES = 2011, 'games', 16, 'lines'
+REGULAR_SEASON, POST_SEASON, DIVISION = 'regular', 'postseason', 'fbs'
 
-## Requests and saves regular/post season stats [games] or Vegas lines [lines]
-def cfb_stats(date, metric, season):
-    results = requests.get(f'https://api.collegefootballdata.com/{metric}?year={date}&seasonType={season}')
+headers = {
+    'accept': 'application/json',
+    'Authorization': service_key
+}
+
+## Request and saves games, lines, and a list of FBS teams as a JSON file.
+## Option 2: (use https://collegefootballdata.com website to download CSV)
+def cfb_games(date, metric, season, division):
+    results = requests.get(f'https://api.collegefootballdata.com/{metric}?year={date}&seasonType={season}&division={division}', 
+                           headers=headers)
     basic_stats = results.json()
-    if metric.lower() == 'games':
-        with open(f'cfb_JSON_{date}\\basicGameStatsCFB-JSON-{season}-{date}.json', 'w') as f:
-            json.dump(basic_stats, f)
-    elif metric.lower() == 'lines':
-        with open(f'cfb_JSON_{date}\\vegasLinesCFB-JSON-{season}-{date}.json', 'w') as f:
-            json.dump(basic_stats, f)
+    with open(f'{date}-basicGameStatsCFB-JSON-{season}.json', 'w') as f:
+        json.dump(basic_stats, f)
+            
+def cfb_lines(date, metric, season):
+    results = requests.get(f'https://api.collegefootballdata.com/{metric}?year={date}&seasonType={season}', 
+                           headers=headers)
+    basic_stats = results.json()
+    with open(f'{date}-vegasLinesCFB-JSON-{season}.json', 'w') as f:
+        json.dump(basic_stats, f)
+        
+def teams_fbs(date):
+    results = requests.get(f'https://api.collegefootballdata.com/teams/fbs?year={date}', 
+                           headers=headers)
+    basic_stats = results.json()
+    with open(f'{date}-teams-FBS-JSON.json', 'w') as f:
+        json.dump(basic_stats, f)
 
-# List games ID, regular season (over 800 games) or post season (around 40 games)
-def detailed_cfb_stats(date, metric, season):
-    cfb_game_id = []
-    regular = requests.get(f'https://api.collegefootballdata.com/{metric}?year={date}&seasonType={season}')
-    basic_stats = regular.json()
-    for i in range(0, len(basic_stats), 1):
-        cfb_game_id.append(basic_stats[i]['id'])
-    print(f'{date} {season} total games: {len(basic_stats)}')
+# Request seasonal stats
+def season_stats(date):
+    results = requests.get(f'https://api.collegefootballdata.com/stats/season?year={date}', 
+                           headers=headers)
+    basic_stats = results.json()
+    with open(f'{date}-season-stats-JSON.json', 'w') as f:
+        json.dump(basic_stats, f)
 
-    # Requests and saves detailed stats for the regular season (takes a loooong time, 15-45 minutes) #757
-    for i in range(0, len(basic_stats), 1):
-        r = requests.get(f'https://api.collegefootballdata.com/games/teams?year={date}&seasonType={season}&gameId={cfb_game_id[i]}')
-        detailed_game_stats = r.json()
-        with open(f'cfb_JSON_{date}\\detailedGameStatsCFB-{season}-{cfb_game_id[i]}.json', 'w') as f:
-            json.dump(detailed_game_stats, f)
-        time.sleep(2.5)
+# Request more details stats to each game; filter by each week
+def cfb_games_teams(date, week_int, season, division):
+    results = requests.get(f'https://api.collegefootballdata.com/games/teams?year={date}&week={week_int}&seasonType={season}&classification={division}', 
+                           headers=headers)
+    basic_stats = results.json()
+    with open(f'{date}-{season}-{week_int}-detailedGamesCFB-JSON.json', 'w') as f:
+        json.dump(basic_stats, f)
+
+# OPTIONAL
+# game/box/advanced
+# https://api.collegefootballdata.com/game/box/advanced?gameId=401551469
+
+# stats/game/advanced
+# https://api.collegefootballdata.com/stats/game/advanced?year=2022&week=2&seasonType=regular
+
 
 def main():
-    cfb_stats(CFB_YEAR, GAMES, REGULAR_SEASON)
-    cfb_stats(CFB_YEAR, GAMES, POST_SEASON)
-    cfb_stats(CFB_YEAR, VEGAS_LINES, REGULAR_SEASON)
-    cfb_stats(CFB_YEAR, VEGAS_LINES, POST_SEASON)
-    detailed_cfb_stats(CFB_YEAR, GAMES, REGULAR_SEASON)
-    detailed_cfb_stats(CFB_YEAR, GAMES, POST_SEASON)
+    # cfb_games(CFB_YEAR, GAMES, REGULAR_SEASON, DIVISION)
+    # cfb_games(CFB_YEAR, GAMES, POST_SEASON, DIVISION)
+    # cfb_lines(CFB_YEAR, VEGAS_LINES, REGULAR_SEASON)
+    # cfb_lines(CFB_YEAR, VEGAS_LINES, POST_SEASON)
+    teams_fbs(CFB_YEAR)
+    # season_stats(CFB_YEAR)
+    #cfb_games_teams(CFB_YEAR, WEEK, REGULAR_SEASON, DIVISION)
 
 if __name__ == "__main__":
     main()
