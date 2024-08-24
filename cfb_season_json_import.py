@@ -4,7 +4,7 @@ import constant
 service_key = constant.API_KEY
 
 # College football constant variables
-CFB_YEAR, GAMES, WEEK, VEGAS_LINES = 2011, 'games', 16, 'lines'
+CFB_YEAR, GAMES, WEEK, VEGAS_LINES = 2018, 'games', 16, 'lines'
 REGULAR_SEASON, POST_SEASON, DIVISION = 'regular', 'postseason', 'fbs'
 
 headers = {
@@ -18,21 +18,21 @@ def cfb_games(date, metric, season, division):
     results = requests.get(f'https://api.collegefootballdata.com/{metric}?year={date}&seasonType={season}&division={division}', 
                            headers=headers)
     basic_stats = results.json()
-    with open(f'{date}-basicGameStatsCFB-JSON-{season}.json', 'w') as f:
+    with open(f'{date}_cfb_JSON-CSV/{date}-basicGameStatsCFB-JSON-{season}.json', 'w') as f:
         json.dump(basic_stats, f)
             
 def cfb_lines(date, metric, season):
     results = requests.get(f'https://api.collegefootballdata.com/{metric}?year={date}&seasonType={season}', 
                            headers=headers)
     basic_stats = results.json()
-    with open(f'{date}-vegasLinesCFB-JSON-{season}.json', 'w') as f:
+    with open(f'{date}_cfb_JSON-CSV/{date}-vegasLinesCFB-JSON-{season}.json', 'w') as f:
         json.dump(basic_stats, f)
         
 def teams_fbs(date):
     results = requests.get(f'https://api.collegefootballdata.com/teams/fbs?year={date}', 
                            headers=headers)
     basic_stats = results.json()
-    with open(f'{date}-teams-FBS-JSON.json', 'w') as f:
+    with open(f'{date}_cfb_JSON-CSV/{date}-teams-FBS-JSON.json', 'w') as f:
         json.dump(basic_stats, f)
 
 # Request seasonal stats
@@ -40,7 +40,7 @@ def season_stats(date):
     results = requests.get(f'https://api.collegefootballdata.com/stats/season?year={date}', 
                            headers=headers)
     basic_stats = results.json()
-    with open(f'{date}-season-stats-JSON.json', 'w') as f:
+    with open(f'{date}_cfb_JSON-CSV/{date}-season-stats-JSON.json', 'w') as f:
         json.dump(basic_stats, f)
 
 # Request more details stats to each game; filter by each week
@@ -48,7 +48,7 @@ def cfb_games_teams(date, week_int, season, division):
     results = requests.get(f'https://api.collegefootballdata.com/games/teams?year={date}&week={week_int}&seasonType={season}&classification={division}', 
                            headers=headers)
     basic_stats = results.json()
-    with open(f'{date}-{season}-{week_int}-detailedGamesCFB-JSON.json', 'w') as f:
+    with open(f'{date}_cfb_JSON-CSV/{date}-{season}-{week_int}-detailedGamesCFB-JSON.json', 'w') as f:
         json.dump(basic_stats, f)
 
 # OPTIONAL
