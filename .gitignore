@@ -7,8 +7,10 @@
 # ignore Python file
 con*.py
 
-# ignore JSON files
+# ignore JSON files, 20xx cfb folders, and CSV files
 *.json
+20*
+*.csv
 
 # Ignore Mac system files
 .DS_store
