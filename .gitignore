@@ -4,8 +4,11 @@
 # ignore Python virtual environment
 .spyproject
 
-# ignore Python file
+# ignore Python scripts
 con*.py
+
+# ignore Jupyter files, for now
+*.ipynb
 
 # ignore JSON files, 20xx cfb folders, and CSV files
 *.json
@@ -14,3 +17,6 @@ con*.py
 
 # Ignore Mac system files
 .DS_store
+
+# Ignore Python bytecode folder
+__pycache*
