@@ -1,25 +1,27 @@
-# cfb_analysis :football:
+# :football: :chart_with_upwards_trend: cfb_analysis :chart_with_downwards_trend: :football:
 
 ### by Ron Craig (ron.craig@comcast.net)
 ### GitHub repository: https://github.com/r-craig73/cfb_analysis
 
 ## Description
-### A Python script that requests college football (CFB) stats as JSON files from api.collegefootballdata.com.
-### Coming soon: A Python script that stores various CFB stats into a large DataFrame.
+### A project to download college football (CFB) stats from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json) and data wrangling the stats into a large database.  
 
-* cfb_season_json_import.py: A script requesting a CFB season of stats (general and detailed, regular and post-season game) and CFB vegas lines from api.collegefootballdata.com.  Results are saved as JSON files.  Detailed JSON files are sorted by game ID number (over 880 games/season). An API key is required to run the script.
-* cfb_data_dataframe_setup.py (coming soon): A script that organize CFB stats into a large DataFrame.
+File | Description 
+-----| -----
+cfb_season_json_import.py | Python script that requests JSON files from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json). The JSON files will contain stats from a year (general and/or detailed stats;  regular and/or post-season game, and Vegas Lines). Detailed JSON files are sorted by game ID number (over 880 games/season). An [API key is required](https://collegefootballdata.com/key) to run the script.
+cfb_stats_jsons_to_dataframe.ipymb (coming soon) | Jupyter notebook file that organizes (or data wrangle) imported JSON files into a large DataFrame for a particular collge football year (hopefully multiple years).
 
 Pros | Cons 
 -----| -----
-The scripts works. | Creating detailed JSON regular season stats takes a while (about 15-45 minutes).
+The Python script works. | Downloading detailed JSON regular season stats for each week could take a while (1-2 minutes).
 --   | Smelly code.
 
 ### Technologies Used
-* ```Application: Python 3.12.4```
-* ```Packages: requests and json```
+* ```Applications: Anaconda Navigator 2.6.2, Spyder 5.5.1, Python 3.12.4, Jupyter 7.0.8, git 2.45.2, and macOS Terminal```
+* ```Python Script Packages: requests and json```
+* ```Jupyter Notebook Packages: os, pandas, numpy, math, and seaborn```
 
 ### Things to Do
 - [x] Refactor regular season and post season JSON import code to one script.
-- [ ] Create a new script using pandas package to import JSON files to a large DataFrame.
-- [ ] Create a private repository using other packages to analyze the DataFrame.
+- [ ] Create a Jupyter notebook to import various JSON files into a large DataFrame.
+- [ ] Create a private repository using scripts and/or Jupyter notebooks to analyze the DataFrame.
