@@ -17,3 +17,6 @@ con*.py
 
 # Ignore Python bytecode folder
 __pycache*
+
+# Ignore Jupyter checkpoint files
+.ipynb_checkpoints
