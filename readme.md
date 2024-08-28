@@ -19,9 +19,9 @@ The Python script works. | Downloading detailed JSON regular season stats for ea
 ### Technologies Used
 * ```Applications: Anaconda Navigator 2.6.2, Spyder 5.5.1, Python 3.12.4, Jupyter 7.0.8, git 2.45.2, and macOS Terminal```
 * ```Python Script Packages: requests and json```
-* ```Jupyter Notebook Packages: os, pandas, numpy, math, and seaborn```
+* ```Jupyter Notebook Packages: json, pandas, and numpy (soon)```
 
 ### Things to Do
 - [x] Refactor regular season and post season JSON import code to one script.
-- [ ] Create a Jupyter notebook to import various JSON files into a large DataFrame.
+- [ ] Create a Jupyter notebook to read various JSON files into a large DataFrame.
 - [ ] Create a private repository using scripts and/or Jupyter notebooks to analyze the DataFrame.
