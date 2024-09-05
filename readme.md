@@ -1,11 +1,10 @@
-# :football: :chart_with_upwards_trend: cfb_analysis :chart_with_downwards_trend: :football:
+# :football: :chart_with_upwards_trend: cfb_data_wrangling :chart_with_downwards_trend: :football:
 
 ### by Ron Craig (ron.craig@comcast.net)
 ### GitHub repository: https://github.com/r-craig73/cfb_data_wrangling
 
 ## Description
-### A project requesting and downloading college football (CFB) stats from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json) as JSON files.
-### Data wrangling practice to manipulate JSON file stats into DataFrames for a season (regular & postseason).
+### A project requesting and downloading college football (CFB) stats from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json) as JSON files. Data wrangling practice to manipulate JSON file stats into DataFrames for a season (regular & postseason).
 
 File | Description 
 -----| -----
