@@ -1,7 +1,7 @@
 # :football: :chart_with_upwards_trend: cfb_analysis :chart_with_downwards_trend: :football:
 
 ### by Ron Craig (ron.craig@comcast.net)
-### GitHub repository: https://github.com/r-craig73/cfb_analysis
+### GitHub repository: https://github.com/r-craig73/cfb_data_wrangling
 
 ## Description
 ### A project to download college football (CFB) stats from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json) and data wrangling the stats into a large database.  
