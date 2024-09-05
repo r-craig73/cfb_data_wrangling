@@ -4,7 +4,8 @@
 ### GitHub repository: https://github.com/r-craig73/cfb_data_wrangling
 
 ## Description
-### A project to download college football (CFB) stats from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json) and data wrangling the stats into a large database.  
+### A project requesting and downloading college football (CFB) stats from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json) as JSON files.
+### Data wrangling practice to manipulate JSON file stats into DataFrames for a season (regular & postseason).
 
 File | Description 
 -----| -----
