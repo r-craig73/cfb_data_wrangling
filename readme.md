@@ -9,7 +9,7 @@
 File | Description 
 -----| -----
 cfb_season_json_import.py | Python script that requests JSON files from [College Football Data API](https://api.collegefootballdata.com/api/docs/?url=/api-docs.json). The JSON files will contain stats from a year (general and/or detailed stats;  regular and/or post-season game, and Vegas Lines). Detailed JSON files are sorted by game ID number (over 880 games/season). An [API key is required](https://collegefootballdata.com/key) to run the script.
-cfb_stats_jsons_to_dataframe.ipymb (coming soon) | Jupyter notebook file that organizes (or data wrangle) imported JSON files into a large DataFrame for a particular collge football year (hopefully multiple years).
+cfb_stats_jsons_to_dataframe.ipymb | Jupyter notebook file that organizes (or data wrangles) imported JSON files into a large DataFrame for a particular collge football year (hopefully multiple years).
 
 Pros | Cons 
 -----| -----
