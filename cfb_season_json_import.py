@@ -4,7 +4,7 @@ import constant
 service_key = constant.API_KEY
 
 # College football constant variables
-CFB_YEAR, GAMES, WEEK, VEGAS_LINES = 2018, 'games', 16, 'lines'
+CFB_YEAR, GAMES, WEEK, VEGAS_LINES = 2024, 'games', 4, 'lines'
 REGULAR_SEASON, POST_SEASON, DIVISION = 'regular', 'postseason', 'fbs'
 
 headers = {
@@ -64,9 +64,9 @@ def main():
     # cfb_games(CFB_YEAR, GAMES, POST_SEASON, DIVISION)
     # cfb_lines(CFB_YEAR, VEGAS_LINES, REGULAR_SEASON)
     # cfb_lines(CFB_YEAR, VEGAS_LINES, POST_SEASON)
-    teams_fbs(CFB_YEAR)
+    # teams_fbs(CFB_YEAR)
     # season_stats(CFB_YEAR)
-    #cfb_games_teams(CFB_YEAR, WEEK, REGULAR_SEASON, DIVISION)
+    cfb_games_teams(CFB_YEAR, WEEK, REGULAR_SEASON, DIVISION)
 
 if __name__ == "__main__":
     main()
